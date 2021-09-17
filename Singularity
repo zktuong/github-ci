@@ -52,3 +52,4 @@ From: continuumio/miniconda3
     which blastn
     conda list
     pytest -p no:cacheprovider /tests -W ignore::DeprecationWarning -W ignore::PendingDeprecationWarning -W ignore::FutureWarning
+

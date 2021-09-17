@@ -89,7 +89,7 @@ jobs:
         run: |
          ls 
          if [ -f "${{ matrix.changed_file }}" ]; then
-            sudo -E singularity build container.sif ${{ matrix.changed_file }}
+            sudo -E singularity build sc-dandelion.sif ${{ matrix.changed_file }}
             tag=$(echo "${recipe/Singularity\./}")
             if [ "$tag" == "Singularity" ]; then
                 tag=latest
@@ -103,12 +103,20 @@ jobs:
            ls
          fi
 
-      - name: Login and Deploy Container
-        if: (github.event_name != 'pull_request')
+      - name: Test Container
+        if: ${{ env.keepgoing == 'true' }}
         env:
-          keepgoing: ${{ env.keepgoing }}
-        run: |         
-            if [[ "${keepgoing}" == "true" ]]; then
-                echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
-                singularity push container.sif oras://ghcr.io/${GITHUB_REPOSITORY}:${tag}
-            fi
+          recipe: ${{ matrix.changed_file }}
+        run: |
+          sudo -E singularity test --writable-tmpfs sc-dandelion.sif;
+
+
+      # - name: Login and Deploy Container
+      #   if: (github.event_name != 'pull_request')
+      #   env:
+      #     keepgoing: ${{ env.keepgoing }}
+      #   run: |
+      #       if [[ "${keepgoing}" == "true" ]]; then
+      #           echo ${{ secrets.GITHUB_TOKEN }} | singularity remote login -u ${{ secrets.GHCR_USERNAME }} --password-stdin oras://ghcr.io
+      #           singularity push container.sif oras://ghcr.io/${GITHUB_REPOSITORY}:${tag}
+      #       fi
