@@ -17,6 +17,8 @@ From: continuumio/miniconda3
     sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     sudo add-apt-repository 'deb https://cloud.r-project.org/bin/linux/ubuntu focal-cran40/' && \
     sudo apt update -y && sudo apt install -y curl libcurl4-openssl-dev rsync r-base r-base-core r-recommended r-base-dev vim
+    
+    # install R packages
     R --slave -e 'install.packages("remotes", repos="https://cloud.r-project.org/")'
     sysreqs=$(R --slave -e 'cat("apt-get update -y && apt-get install -y", paste(gsub("apt-get install -y ", "", remotes::system_requirements("ubuntu", "20.04", package = c("shazam","alakazam","tigger","airr","optparse","Biostrings","GenomicAlignments","IRanges","BiocManager","RCurl","XML"))), collapse = " "))')
     echo $sysreqs
