@@ -89,7 +89,7 @@ jobs:
         run: |
          ls 
          if [ -f "${{ matrix.changed_file }}" ]; then
-            sudo -E singularity build sc-dandelion.sif ${{ matrix.changed_file }}
+            sudo -E singularity build --notest sc-dandelion.sif ${{ matrix.changed_file }}
             tag=$(echo "${recipe/Singularity\./}")
             if [ "$tag" == "Singularity" ]; then
                 tag=latest
