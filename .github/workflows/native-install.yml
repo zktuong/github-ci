@@ -37,11 +37,8 @@ jobs:
       - name: Continue if Singularity Recipe
         run: |
           # Continue if we have a changed Singularity recipe
-          if [[ "${{ matrix.changed_file }}" = *Singularity* ]]; then
+          if [[ "${{ matrix.changed_file }}" = *Singularity* ]] || [[ "${{ matrix.changed_file }}" = *dandelion* ]]; then
             echo "keepgoing=true" >> $GITHUB_ENV
-          else
-            if [[ "${{ matrix.changed_file }}" = *dandelion* ]]; then
-              echo "keepgoing=true" >> $GITHUB_ENV
           fi          
 
       - name: Set up Go 1.13
