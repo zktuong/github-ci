@@ -71,9 +71,9 @@ def main():
     ddl.logging.print_header()
     # sponge up command line arguments to begin with
     args = parse_args()
-    start = logg.info('Beginning preprocessing\n')
+    start = logg.info('\nBeginning preprocessing\n')
 
-    logg.info((
+    logg.info(deep=(
         f'command line parameters:\n',
         f'--------------------------------------------------------------\n'
         f'    --meta = {args.meta}\n'
