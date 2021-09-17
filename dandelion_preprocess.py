@@ -76,7 +76,8 @@ def main():
     logg.info(
         'command line parameters:\n',
         deep=
-        (f'--------------------------------------------------------------\n'
+        (f'\n'
+         f'--------------------------------------------------------------\n'
          f'    --meta = {args.meta}\n'
          f'    --chain = {args.chain}\n'
          f'    --file_prefix = {args.file_prefix}\n'
