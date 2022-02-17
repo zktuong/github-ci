@@ -38,15 +38,15 @@ jobs:
         uses: actions/checkout@v2
       - name: Extract repo location
         shell: bash
-        run: echo "##[set-output name=location;]$(echo "git+https://www.github.com/${GITHUB_REPOSITORY}@${GITHUB_REF#refs/heads/}")"
+        run: echo "##[set-output name=location;]$(echo "  - git+https://www.github.com/${GITHUB_REPOSITORY}@${GITHUB_REF#refs/heads/}")"
         id: extract_location
       - name: location
         id: repo
         run: |
           echo "Present working directory: $PWD"
           ls
-          echo ${{ steps.extract_location.outputs.location }}
-          cat environment_dev.yml
+          echo 'echo ${{ steps.extract_location.outputs.location }}' >> environment_test.yml
+          cat environment_test.yml
       
       # - name: Login and Deploy Container
       #   if: (github.event_name != 'pull_request')
