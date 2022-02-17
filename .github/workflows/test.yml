@@ -44,6 +44,7 @@ jobs:
       - name: location
         id: repo
         run: |
+          echo "Present working directory: $PWD"
           ls
           echo ${{ steps.extract_location.outputs.location }}
           cat environment_dev.yml
