@@ -34,9 +34,8 @@ jobs:
 
     name: Check ${{ matrix.changed_file }}
     steps:
-      - name: Continue if Singularity Recipe
-        run: |
-          echo ${GITHUB_REPOSITORY}
+      - name: Check out repo
+        uses: actions/checkout@v2
       - name: Extract repo location
         shell: bash
         run: echo "##[set-output name=location;]$(echo "git+https://www.github.com/${GITHUB_REPOSITORY}@${GITHUB_REF#refs/heads/}")"
