@@ -45,7 +45,7 @@ jobs:
         run: |
           echo "Present working directory: $PWD"
           ls
-          echo 'echo ${{ steps.extract_location.outputs.location }}' >> environment_dev.yml
+          echo '${{ steps.extract_location.outputs.location }}' >> environment_dev.yml
           cat environment_dev.yml
       
       # - name: Login and Deploy Container
