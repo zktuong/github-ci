@@ -36,7 +36,15 @@ jobs:
     steps:
       - name: Continue if Singularity Recipe
         run: |
-          echo $GITHUB_REPOSITORY
+          echo ${GITHUB_REPOSITORY}
+          echo ${GITHUB_WORKSPACE}
+      - name: Extract branch name
+        shell: bash
+        run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+        id: extract_branch
+      - name: Push to ECR
+        id: ecr
+        run: echo ${{ steps.extract_branch.outputs.branch }}
       # - name: Login and Deploy Container
       #   if: (github.event_name != 'pull_request')
       #   env:
